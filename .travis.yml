@@ -1,4 +1,16 @@
 language: java
+sudo: false
+install: true
+addons:
+  sonarcloud:
+    organization: loganthatcher-github
+    token:
+      secure: e6fa3ff65a6160543d6cd4ebd67fa3cfa9d93ba0
 jdk:
-   - oraclejdk8
-script: ant build
+  - oraclejdk8
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
